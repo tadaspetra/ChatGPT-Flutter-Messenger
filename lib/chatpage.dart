@@ -72,7 +72,7 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
   Future<String> _sendAIMessage(String message) async {
     final request = CompleteText(
       prompt: message,
-      model: Model.kTextDavinci3,
+      model: Model.textDavinci3,
       maxTokens: 200,
     );
 
@@ -232,9 +232,7 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
 
   void _addLogToConsole(String log) {
     _logText.add("$_timeString: $log");
-    setState(() {
-      scrollController.jumpTo(scrollController.position.maxScrollExtent);
-    });
+    debugPrint(log);
   }
 
   String get _timeString {
