@@ -264,8 +264,8 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
         appBar: AppBar(
           title: Text(widget.receiverId),
         ),
-        body: Container(
-          padding: const EdgeInsets.only(left: 10, right: 10),
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
@@ -287,10 +287,8 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
                               color: Colors.lightBlue[100],
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Expanded(
-                              child: Text(
-                                _messages[index].text!,
-                              ),
+                            child: Text(
+                              _messages[index].text!,
                             ),
                           )
                         else
@@ -304,10 +302,8 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
                                     color: Colors.lightGreen[100],
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: Expanded(
-                                    child: Text(
-                                      _messages[index].text!,
-                                    ),
+                                  child: Text(
+                                    _messages[index].text!,
                                   ),
                                 ),
                               ),
@@ -320,45 +316,65 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
                 ),
               ),
               if (_isWaitingResponse)
-                const Center(child: CircularProgressIndicator()),
-              TextField(
-                decoration: const InputDecoration(
-                  hintText: "Enter message",
+                const Center(child: CircularProgressIndicator())
+              else
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => _onTapSendHappyMessage(),
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue[300]),
+                        ),
+                        child: const Text("   HAPPY AI   "),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => _onTapSendAngryMessage(),
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red[300]),
+                        ),
+                        child: const Text("   ANGRY AI   "),
+                      ),
+                    ),
+                  ],
                 ),
-                controller: _messageController,
-              ),
-              const SizedBox(height: 10),
-              TextButton(
-                onPressed: () =>
-                    _sendMessage(widget.receiverId, _messageController.text),
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.white),
-                  backgroundColor: MaterialStateProperty.all(Colors.lightBlue),
-                ),
-                child: const Text("SEND TEXT"),
-              ),
-              const SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.max,
                 children: [
-                  TextButton(
-                    onPressed: () => _onTapSendHappyMessage(),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.lightBlue),
+                  Expanded(
+                    flex: 4,
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        hintText: "Enter message",
+                        border: InputBorder.none,
+                      ),
+                      maxLines: 2,
+                      controller: _messageController,
                     ),
-                    child: const Text("   HAPPY AI   "),
                   ),
-                  TextButton(
-                    onPressed: () => _onTapSendAngryMessage(),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.lightBlue),
+                  Expanded(
+                    child: IconButton(
+                      onPressed: () => _sendMessage(
+                          widget.receiverId, _messageController.text),
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.lightBlue),
+                      ),
+                      icon: const Icon(Icons.send),
                     ),
-                    child: const Text("   ANGRY AI   "),
                   ),
                 ],
               ),
