@@ -1,5 +1,7 @@
 # ChatGPT Messenger
 
+![ChatGPT Messenger](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmQwYmZmNjI0YjAyYzRkNmU5YzJmYTg1ZmY0MGMyM2RjNTYyMjFlZiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/UHcmrEwa7HShZ4b5NI/giphy.gif)
+
 # How to run this
 1. In project directory run `flutter create .` to create the platform folders and other necessary files.
 2. Create a `consts.dart` file with the following contents:
@@ -15,4 +17,13 @@ class AgoraChatConfig {
 String openAIToken = "Your Token";
 
 ```
-3. `flutter run`
+3. Run the application: `flutter run`
+
+# How to retrieve `consts.dart` values
+1. Create an account on [Agora.io](https://console.agora.io/)
+2. Create a project
+3. Scroll down to `Chat` and click `Enable/Configure` 
+4. Click the toggle button and copy paste the AppKey.
+5. On the left side under `Operation Management` select `User` and create 2 users. (Remember the User IDs)
+6. Go back to `Application Information` under the `Basic Information` tab and enter the User IDs for each user in the `Chat User Temp Token` field, and click `Generate`. Bring the tokens and User IDs to the `consts.dart` file.
+
