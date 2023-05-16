@@ -1,6 +1,6 @@
 # ChatGPT Messenger
 
-![ChatGPT Messenger](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmQwYmZmNjI0YjAyYzRkNmU5YzJmYTg1ZmY0MGMyM2RjNTYyMjFlZiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/UHcmrEwa7HShZ4b5NI/giphy.gif)
+![ChatGPT Messenger](output.gif)
 
 # How to run this
 1. In project directory run `flutter create .` to create the platform folders and other necessary files.
