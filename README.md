@@ -19,7 +19,7 @@ String openAIToken = "Your Token";
 ```
 3. Run the application: `flutter run`
 
-## How to retrieve `consts.dart` values
+## How to retrieve Agora Chat information
 1. Create an account on [Agora.io](https://console.agora.io/)
 2. Create a project
 3. Scroll down to `Chat` and click `Enable/Configure` 
