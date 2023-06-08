@@ -1,41 +1,41 @@
 # ChatGPT Flutter Messenger
 
-In this day and age, it's so time consuming keeping up with friends. Before social media and messaging apps came out you actually had to spend time with people in real life. Although it has gotten a bit better now that you can just message them, it is still a pain having to think of what to say and interact with them. 
+Nowadays, it's so time-consuming keeping up with friends. Before social media and messaging apps arrived, you actually had to spend time with people in real life. Although it has gotten a bit better now that you can just message them, it is still a pain having to think of what to say and interact with them. 
 
 Now there is a solution! You no longer need to think, you can just have an AI chat with your friends!
 
-Of course this is just a joke, you should definitely still hang out with friends and not outsource your relationships to AI, but this is still a cool use-case, that can be used for replies to bots, or maybe even to help you keep the conversation going when it get's a bit stale. 
+We're joking, of course: you should definitely still hang out with friends and not outsource your relationships to AI. But this is still a cool use case that can be used for replies to bots or even to help you keep the conversation going when it gets a bit stale. 
 
 In this article we will cover how you can build your own chat application using [Agora Chat](https://docs.agora.io/en/agora-chat/overview/product-overview?platform=flutter) and then making it even fancier by adding ChatGPT.
 
-You can find the [full code here](https://github.com/tadaspetra/ChatGPT-Flutter-Messenger)
+You can find the [full code here](https://github.com/tadaspetra/ChatGPT-Flutter-Messenger).
 
 ## Agora Chat
-Agora Chat enables you communicate with your friends via chat. This includes text, images, gifs, emojis and other media. This can be used as a standalone chat application, or it can be integrated into your existing applications that use RTC (Real Time Communication) such as video calling.
+Agora Chat enables you to communicate with your friends and include text, images, GIFs, emojis, and other media. Agora Chat can be used as a standalone application, or it can be integrated into your existing applications that use real-time communication (RTC) such as video calling.
 
 ## ChatGPT
-ChatGPT is OpenAI's AI model that can generate very realistic responses to messages. We will be using their API to send requests to the model and get responses that we will insert into our chat. 
+OpenAI's ChatGPT is their AI model, which can generate very realistic responses to messages. We will be using the OpenAI API to send requests to the model and get responses that we will insert into our chat. 
 
 ## Setup
 To interact with these services, we will need to create accounts on both Agora and OpenAI and retrieve some tokens.
 
 ### How to retrieve Agora Chat information
-1. Create an account on [Agora.io](https://console.agora.io/)
+1. Create an account on [Agora.io](https://console.agora.io/).
 2. Create a project
 3. Scroll down to `Chat` and click `Enable/Configure` 
-4. Click the toggle button and copy paste the AppKey.
-5. On the left side under `Operation Management` select `User` and create 2 users. (Remember the User IDs)
-6. Go back to `Application Information` under the `Basic Information` tab and enter the User IDs for each user in the `Chat User Temp Token` field, and click `Generate`. Bring the tokens and User IDs to a `consts.dart` file.
+4. Click the toggle button and copy and paste the AppKey.
+5. On the left side under `Operation Management` select `User` and create two users. (Note down the user IDs.)
+6. Go back to `Application Information` under the `Basic Information` tab and enter the user ID for each user in the `Chat User Temp Token` field. Click `Generate`. Copy and paste the tokens and user IDs into a `consts.dart` file.
 
 ### How to get an OpenAI token
-1. Create an account on [OpenAI](https://platform.openai.com/)
-2. Top right corner click on your image and select "View API Keys"
-3. Create a new Secret Key and copy paste it into the `consts.dart` file.
+1. Create an account on [OpenAI](https://platform.openai.com/).
+2. In the top right corner click your image and select "View API Keys"
+3. Create a new secret key and copy and paste it into the `consts.dart` file.
 
 ## Chat Page
-We need to get to the chat page, with the current users ID and token and the user's ID who you want to message. There are multiple ways to do this, but for this example I just created two buttons where you can log in as each individual user. You can see more in the [`main.dart` file](https://github.com/tadaspetra/ChatGPT-Flutter-Messenger/blob/main/lib/main.dart).
+We need to get to the chat page, with the current users ID, token, and ID of the user you want to message. There are multiple ways to do this, but for this example I just created two buttons where you can log in as each individual user. You can see more in the [`main.dart` file](https://github.com/tadaspetra/ChatGPT-Flutter-Messenger/blob/main/lib/main.dart).
 
-As soon as we launch into the chat page there are three things that need to happen in order for our chat to be initialized. Since we haven't done any setup with the Agora Chat SDK, we need to initialize the SDK, then add a listener for messages, and finally log the current user in to have it fully ready to use. These 3 functions will need to be called in the `initState`
+As soon as we launch into the chat page, three things need to happen for our chat to be initialized. Since we haven't done any setup with the Agora Chat SDK, we need to initialize the SDK, then add a listener for messages, and finally log in the current user in to have chat application fully ready to use. These three functions need to be called in the `initState`.
 
 ```dart
 void _initSDK() async {
@@ -89,7 +89,7 @@ void _signIn() async {
 }
 ```
 
-Since we have the sign in method here, let's also create our sign out method. This will be called in the `dispose` method.
+Since we have the sign-in method here, let's also create our sign-out method. This will be called in the `dispose` method.
 
 ```dart
 void _signOut() async {
@@ -105,10 +105,10 @@ void _signOut() async {
 }
 ```
 
-You'll notice there are a couple functions called in the Chat Listener that aren't shown.
-* `_addMessage` adds the incoming message to list of visible messages.
+You'll notice that a couple of functions called in the Chat Listener aren't shown:
+* `_addMessage` adds the incoming message to the list of visible messages.
 * `debugPrint` adds the incoming message to the console log.
-* `onMessagesReceived` is a function that is called when a message is received. (We will also use `_addMessage` with there to keep a list from both parties)
+* `onMessagesReceived` is a function that is called when a message is received. (We will also use `_addMessage` to keep a list from both parties)
 
 Below are the definitions for those functions
 
