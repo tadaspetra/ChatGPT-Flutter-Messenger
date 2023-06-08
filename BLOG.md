@@ -108,9 +108,9 @@ void _signOut() async {
 You'll notice that a couple of functions called in the Chat Listener aren't shown:
 * `_addMessage` adds the incoming message to the list of visible messages.
 * `debugPrint` adds the incoming message to the console log.
-* `onMessagesReceived` is a function that is called when a message is received. (We will also use `_addMessage` to keep a list from both parties)
+* `onMessagesReceived` is a function that is called when a message is received. (We will also use `_addMessage` to keep a list from both parties.)
 
-Below are the definitions for those functions
+Below are the definitions for those functions.
 
 ```dart
 void onMessagesReceived(List<ChatMessage> messages) {
@@ -142,7 +142,7 @@ void _addMessage(DemoMessage message) {
 ```
 
 ## Show the Chat
-This will be displayed in a `ListView.builder` that will display all the messages in the `_messages` list. You will also need to add a `TextField` at the bottom of the screen that will allow us to send messages. 
+A `ListView.builder` will display all the messages in the `_messages` list. You will also need to add a `TextField` at the bottom of the screen that will allow us to send messages. 
 
 ```dart
 ListView.builder(
@@ -190,7 +190,7 @@ ListView.builder(
 ```
 
 ## Send a Message
-To send a message we will need to call the `sendMessage` function from the Agora Chat SDK. This function takes in a `ChatMessage` object.  We will also need to pass in the user ID of the person we want to send the message to. 
+To send a message we need to call the `sendMessage` function from the Agora Chat SDK. This function takes in a `ChatMessage` object.  We also need to pass in the user ID of the person we want to send the message to. 
 
 ```dart
 void _sendMessage(String sentTo, String? message) async {
@@ -212,12 +212,12 @@ void _sendMessage(String sentTo, String? message) async {
 }
 ```
 
-This should be a fully functioning Agora Chat application. The last step is to integrate ChatGPT to allow for AI generated responses.
+We now have a fully functioning Agora Chat application. The last step is to integrate ChatGPT to enable AI generated responses.
 
 # ChatGPT
-To use ChatGPT we need to connect to the API first. We will also declare a `isWaitingResponse` variable that will be used to disable the send button while we wait for a response from the API. 
+To use ChatGPT we first need to connect to the API. We also need to declare a `isWaitingResponse` variable that is used to disable the send button while we wait for a response from the API. 
 
-Then once it is declared we can set up different functions to send either a happy or an angry response to the other users last message 
+Once the variable is declared we can set up functions to send either a happy or an angry response to the other user's last message 
 
 ```dart
 final openAI = OpenAI.instance.build(
@@ -276,6 +276,6 @@ Future<String> _sendAIMessage(String message) async {
 }
 ```
 
-That's the full functionality of our application. You now can add buttons that generate those responses and put them into the `TextController.value` of the `TextField` to allow the user to send them. 
+That's the full functionality of our application. You now can add buttons that generate those responses and put them into the `TextController.value` of the `TextField` to enable the user to send them. 
 
-Thank you for reading, [click here to read and learn more about Agora.](https://docs.agora.io/en/)
+Thank you for reading. [Click here to read and learn more about Agora.](https://docs.agora.io/en/).
