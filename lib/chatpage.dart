@@ -32,45 +32,43 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
   final TextEditingController _messageController = TextEditingController();
   final List<DemoMessage> _messages = [];
 
-  final openAI = OpenAI.instance.build(
-      token: openAIToken,
-      baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 30)),
-      isLog: true);
-  var _isWaitingResponse = false;
+  final openAI = OpenAI.instance.build(token: openAIToken);
+  bool _isWaitingResponse = false;
 
   void _onTapSendHappyMessage() async {
+    setState(() {
+      _isWaitingResponse = true;
+    });
+
     final List<DemoMessage> otherMessages = _messages
         .where((element) => element.senderId != widget.userId)
         .toList();
-    _reset();
-    _sendAIMessage(
+
+    String response = await _sendAIMessage(
       "Give me a happy response to the message: ${otherMessages.last.text}",
-    ).then((value) {
-      setState(() {
-        _isWaitingResponse = false;
-        _messageController.text = value.trim();
-      });
+    );
+
+    setState(() {
+      _isWaitingResponse = false;
+      _messageController.text = response.trim();
     });
   }
 
   void _onTapSendAngryMessage() async {
+    setState(() {
+      _isWaitingResponse = true;
+    });
+
     final List<DemoMessage> otherMessages = _messages
         .where((element) => element.senderId != widget.userId)
         .toList();
-    _reset();
-    _sendAIMessage(
-      "Give me an angry response to the message: ${otherMessages.last.text}",
-    ).then((value) {
-      setState(() {
-        _isWaitingResponse = false;
-        _messageController.text = value.trim();
-      });
-    });
-  }
 
-  void _reset() {
+    String response = await _sendAIMessage(
+      "Give me an angry response to the message: ${otherMessages.last.text}",
+    );
     setState(() {
-      _isWaitingResponse = true;
+      _isWaitingResponse = false;
+      _messageController.text = response.trim();
     });
   }
 
@@ -135,6 +133,8 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
     );
     await ChatClient.getInstance.init(options);
     await ChatClient.getInstance.startCallback();
+    _addChatListener();
+    _signIn();
   }
 
   void _addChatListener() {
@@ -194,8 +194,6 @@ class _AgoraChatPageState extends State<AgoraChatPage> {
   void initState() {
     super.initState();
     _initSDK();
-    _addChatListener();
-    _signIn();
   }
 
   @override

@@ -58,25 +58,25 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const AgoraChatPage(
-                  userId: AgoraChatConfig.userId,
-                  agoraToken: AgoraChatConfig.agoraToken,
-                  chatKey: AgoraChatConfig.appKey,
-                  receiverId: AgoraChatConfig.userId2,
+                  userId: userId,
+                  agoraToken: agoraToken,
+                  chatKey: appKey,
+                  receiverId: userId2,
                 ),
               )),
-              child: const Text("Login as ${AgoraChatConfig.userId}"),
+              child: const Text("Login as $userId"),
             ),
             const SizedBox(height: 20),
             TextButton(
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const AgoraChatPage(
-                  userId: AgoraChatConfig.userId2,
-                  agoraToken: AgoraChatConfig.agoraToken2,
-                  chatKey: AgoraChatConfig.appKey,
-                  receiverId: AgoraChatConfig.userId,
+                  userId: userId2,
+                  agoraToken: agoraToken2,
+                  chatKey: appKey,
+                  receiverId: userId,
                 ),
               )),
-              child: const Text("Login as ${AgoraChatConfig.userId2}"),
+              child: const Text("Login as $userId2"),
             ),
           ],
         ),
